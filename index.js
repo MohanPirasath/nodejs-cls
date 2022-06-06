@@ -1,50 +1,10 @@
 
-// const express =require("express");
-// // import { MongoClient } from "mongodb";
-// const {MongoClient} = require("mongodb")
-
-// const app=express();
-
-// const port=4000;
-
-// // const movies=["hh"]
-
-// const MONGO_URL="mongodb://localhost"
-// async function Creatlink(){
-//     const Client=new MongoClient(MONGO_URL);
-//     await Client.connect();
-//     console.log("connected")
-//     return Client;
-// }
-
-// const Client = await Creatlink();
-
-// app.get("/",function (req,res) {res.send("welcome")})
-// app.get("/movies",function (req,res) {res.send(movies)})
-// app.get("/movies/:id",function (req,res)
-//  {
-//      const{id}=req.params;
-//      const onemovie= movies.find((mv)=>mv.id==id)
-//      onemovie?res.send(onemovie):res.send("no movie")
-     
-//     })
-
-
-// app.post("/movies",express.json(), async function (req,res){
-//     const data=req.body;
-//     const result= await Client.db("b33wd").collection("movies").insertMany(data);
-//      res.send(result)
-// })
-
-
-
-// app.listen(port,()=>console.log("super"))
-
-
 // const express=require("express");
 import express from "express";
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
+
+import {moviesRouter} from "./routes/movies.js";
 
 dotenv.config();
 
@@ -73,59 +33,13 @@ const MONGO_URL=process.env.MONGO_URL
     console.log("Mongo Connected")
     return(Client)
 }
- const Client= await Connection();
+ export const Client= await Connection();
 
 app.get("/",function(req,res){
     res.send("welcome to Movies App ")
 })
 
 
-app.get("/movies", async function(req,res){
-
-const allmovies= await Client.db("B33WD").collection("movies").find({}).toArray()
-
-    res.send(allmovies)
-})
-app.get("/movies/:id",async function(req,res){
-    const{id}=req.params
-    // console.log(id);
-
-
-    // const onemovie=(movies.find((mv)=>{
-    //     return(
-    //     mv.id==id)
-    // }))
-
- const onemovie= await Client.db("B33WD").collection("movies").findOne({id: id});
-//  console.log(onemovie);
-
-     onemovie?res.send(onemovie):res.status("404").send("No such movie found")
-
-    
-})
-
-
-app.post("/movies",async function(req,res){
-    const data=req.body;
-   const result = await Client.db("B33WD").collection("movies").insertMany(data);
-   res.send(result);
-})
-
-app.put("/movies/:id",async function(req,res){
-    const data=req.body;
-    const{id}=req.params
-   const result = await Client.db("B33WD").collection("movies").updateOne({id:id},{$set:data});
-   res.send(result);
-})
-
-app.delete("/movies/:id",async function(req,res){
-    const{id}=req.params;
-    const deletemovies = await Client.db("B33WD").collection("movies").deleteOne({id:id});
-    deletemovies.deletedCount>0
-    ?res.send(deletemovies):res.status("404").send("No such movie found")
-
-
-})
-
+app.use('/movies',moviesRouter);
 
 app.listen(PORT,()=>console.log(`App started in ${PORT}`))

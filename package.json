@@ -30,6 +30,9 @@
   "dependencies": {
   
     
+  "bcrypt": "^5.0.1",
+  
+    
   "dotenv": "^16.0.1",
   
     
