@@ -61,7 +61,7 @@ app.use(express.json())
 // {"id":"107","name":"Baahubali","src":"https://flxt.tmsimg.com/assets/p11546593_p_v10_af.jpg","rate":8,"notes":"In the kingdom of Mahishmati, Shivudu falls in love with a young warrior woman. While trying to woo her, he learns about the conflict-ridden past of his family and his true legacy.","trailer":"https://www.youtube.com/embed/sOEg_YZQsTI"},
 // {"id":"108","name":"Ratatouille","src":"https://resizing.flixster.com/gL_JpWcD7sNHNYSwI1ff069Yyug=/ems.ZW1zLXByZC1hc3NldHMvbW92aWVzLzc4ZmJhZjZiLTEzNWMtNDIwOC1hYzU1LTgwZjE3ZjQzNTdiNy5qcGc=","rate":8,"notes":"Remy, a rat, aspires to become a renowned French chef. However, he fails to realise that people despise rodents and will never enjoy a meal cooked by him.","trailer":"https://www.youtube.com/embed/NgsQ8mVkN8w"}]
 
-const PORT=4000
+const PORT=process.env.PORT
 
 // const MONGOURL="mongodb://localhost"
 const MONGO_URL=process.env.MONGO_URL
@@ -111,6 +111,21 @@ app.post("/movies",async function(req,res){
    res.send(result);
 })
 
+app.put("/movies/:id",async function(req,res){
+    const data=req.body;
+    const{id}=req.params
+   const result = await Client.db("B33WD").collection("movies").updateOne({id:id},{$set:data});
+   res.send(result);
+})
+
+app.delete("/movies/:id",async function(req,res){
+    const{id}=req.params;
+    const deletemovies = await Client.db("B33WD").collection("movies").deleteOne({id:id});
+    deletemovies.deletedCount>0
+    ?res.send(deletemovies):res.status("404").send("No such movie found")
+
+
+})
 
 
 app.listen(PORT,()=>console.log(`App started in ${PORT}`))
