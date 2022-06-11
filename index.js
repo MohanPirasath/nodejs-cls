@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 
 import {moviesRouter} from "./routes/movies.js";
+// import { usersRouter } from "./user.js";
 import {usersRouter} from "./routes/users.js";
 
 dotenv.config();
@@ -42,7 +43,7 @@ app.get("/",function(req,res){
 })
 
 
-app.use("/movies", moviesRouter);
+// app.use("/movies", moviesRouter);
 // app.use("/users", usersRouter);
 
 app.listen(PORT,()=>console.log(`App started in ${PORT}`))
