@@ -1,6 +1,6 @@
 import express from "express";
 import { Router } from "express";
-import { getallmovies, getmoviebyid, createmovie, updatebyid, deletebyid } from "./deletebyid.js";
+import { getallmovies, getmoviebyid, createmovie, updatebyid, deletebyid } from "./helper.js";
 
 const router = express.Router();
 
