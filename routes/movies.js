@@ -21,7 +21,7 @@ router.get("/:id",auth, async function (req, res) {
   onemovie ? res.send(onemovie) : res.status("404").send("No such movie found");
 });
 
-router.post("/", async function (req, res) {
+router.post("/addmovie", async function (req, res) {
   const data = req.body;
   const result = await createmovie(data);
   res.send(result);
