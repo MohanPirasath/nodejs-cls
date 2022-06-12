@@ -1,16 +1,16 @@
-import express from "express";
-import { Client } from "../index";
+// import express from "express";
+// import { Client } from "../index";
 
-const router=express.Router();
+// const router=express.Router();
 
-router.post("/signup",async function(req,res){
-    const data= req.body
-    console.log("data",data)
-    const newuser= await Client.db("B33WD").collection("user").insertOne(data)
-    console.log("newuser",newuser)
-    res.send(newuser)
+// router.post("/signup",async function(req,res){
+//     const data= req.body
+//     console.log("data",data)
+//     const newuser= await Client.db("B33WD").collection("user").insertOne(data)
+//     console.log("newuser",newuser)
+//     res.send(newuser)
     
 
-})
+// })
 
- export const usersRouter = router;
+//  export const usersRouter = router;
