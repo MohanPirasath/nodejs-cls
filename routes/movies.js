@@ -6,7 +6,7 @@ import { auth } from "./middlewear/auth.js";
 
 const router = express.Router();
 
-router.get("/", auth,async function (req, res) {
+router.get("/", async function (req, res) {
   const allmovies = await getallmovies();
 
   res.send(allmovies);
