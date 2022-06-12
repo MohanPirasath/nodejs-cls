@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 import {moviesRouter} from "./routes/movies.js";
 import { newusersRouter } from "./routes/newusers.js";
 // import {usersRouter} from "./routes/users.js";
+import cors from "cors"
 
 dotenv.config();
 
