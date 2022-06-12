@@ -1,15 +1,17 @@
 import express from "express";
 import { Router } from "express";
+
 import { getallmovies, getmoviebyid, createmovie, updatebyid, deletebyid } from "./helper.js";
+import { auth } from "./middlewear/auth.js";
 
 const router = express.Router();
 
-router.get("/", async function (req, res) {
+router.get("/", auth,async function (req, res) {
   const allmovies = await getallmovies();
 
   res.send(allmovies);
 });
-router.get("/:id", async function (req, res) {
+router.get("/:id",auth, async function (req, res) {
   const { id } = req.params;
 
 

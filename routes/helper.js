@@ -10,10 +10,25 @@ export async function updatebyid(id, data) {
         .collection("movies")
         .updateOne({ id: id }, { $set: data });
 }
+
+
 export async function createmovie(data) {
     return await Client.db("B33WD").collection("movies").insertMany(data);
 }
-export async function getmoviebyid(id) {
+
+export async function createuser(data) {
+    return await Client.db("B33WD").collection("users").insertOne(data);
+}
+
+
+export async function getuserbyname(username) {
+    return await Client.db("B33WD")
+        .collection("users")
+        .findOne({ username:username});
+}
+
+
+export async function getmoviebyid (id) {
     return await Client.db("B33WD")
         .collection("movies")
         .findOne({ id: id });

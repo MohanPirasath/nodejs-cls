@@ -3,10 +3,9 @@
 import express from "express";
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
-import bcrypt from "bcrypt";
 
 import {moviesRouter} from "./routes/movies.js";
-// import { usersRouter } from "./user.js";
+import { newusersRouter } from "./routes/newusers.js";
 // import {usersRouter} from "./routes/users.js";
 
 dotenv.config();
@@ -43,19 +42,15 @@ app.get("/",function(req,res){
 })
 
 
+
+
+
+
+
+
 app.use("/movies", moviesRouter);
-// app.use("/users", usersRouter);
+app.use("/users", newusersRouter);
 
 app.listen(PORT,()=>console.log(`App started in ${PORT}`))
 
 
-async function  Genhashpass(password){
-    const No_of_round=10
-    const salt= await bcrypt.genSalt(No_of_round);
-    console.log("salt",salt);
-    const hashedpassword = await bcrypt.hash(password,salt);
-    console.log("hashpass",hashedpassword)
-   
-}
-
-Genhashpass("password123")
